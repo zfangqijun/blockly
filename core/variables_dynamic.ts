@@ -92,6 +92,11 @@ export function flyoutCategory(workspace: WorkspaceSvg): Element[] {
   button.setAttribute('callbackKey', 'CREATE_VARIABLE_COLOUR');
   xmlList.push(button);
 
+  button = document.createElement('button');
+  button.setAttribute('text', 'NEW_BOOLEAN_VARIABLE');
+  button.setAttribute('callbackKey', 'CREATE_VARIABLE_BOOLEAN');
+  xmlList.push(button);
+
   workspace.registerButtonCallback(
     'CREATE_VARIABLE_STRING',
     stringButtonClickHandler,
@@ -103,6 +108,16 @@ export function flyoutCategory(workspace: WorkspaceSvg): Element[] {
   workspace.registerButtonCallback(
     'CREATE_VARIABLE_COLOUR',
     colourButtonClickHandler,
+  );
+  workspace.registerButtonCallback(
+    'CREATE_VARIABLE_BOOLEAN',
+    function (button: FlyoutButton) {
+      Variables.createVariableButtonHandler(
+        button.getTargetWorkspace(),
+        undefined,
+        'Boolean',
+      );
+    },
   );
 
   const blockList = flyoutCategoryBlocks(workspace);
